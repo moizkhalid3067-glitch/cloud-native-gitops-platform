@@ -124,3 +124,24 @@ Do not commit passwords, tokens, kubeconfig files, `.env` files or private keys.
 ## License
 
 MIT — add a `LICENSE` file before publishing if you choose this license.
+
+
+## Kubernetes Reliability Testing
+
+The local Kubernetes deployment was validated with the following tests:
+
+- Deployed two application replicas.
+- Verified liveness and readiness health endpoints.
+- Deleted a running pod to simulate an unexpected workload interruption.
+- Confirmed that Kubernetes automatically created a replacement pod.
+- Verified that the deployment returned to `2/2` ready replicas.
+- Confirmed that the application health endpoints remained accessible through the Kubernetes Service.
+
+### Recovery Verification
+
+The deleted pod was replaced automatically by Kubernetes, and the replacement became Ready. The Deployment returned to its desired state of two available replicas.
+
+### Health Endpoints
+
+- Liveness: `/health/live`
+- Readiness: `/health/ready`
